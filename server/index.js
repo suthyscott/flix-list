@@ -6,14 +6,25 @@ const {SERVER_PORT} = process.env
 
 const {User, Show, Movie} = require('./models/tables')
 const {sequelize} = require('./util/database')
+const {register, login} = require('./controllers/authCtrl')
 
 const app = express()
 
 app.use(express.json())
 app.use(cors())
 
+User.hasMany(Show)
+Show.belongsTo(User)
+
+User.hasMany(Movie)
+Movie.belongsTo(User)
+
+
+app.post('/api/register', register)
+app.post('/api/login', login)
 
 sequelize.sync()
+// sequelize.sync({force: true})
     .then(() => {
         
         app.listen(SERVER_PORT, () => console.log(`Take us to warp ${SERVER_PORT}!`))
