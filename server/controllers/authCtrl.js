@@ -36,11 +36,38 @@ module.exports = {
             }
         } catch (err) {
             console.log(err)
-            res.status(400).send('error in register')
+            res.status(400).send("error in register")
         }
     },
-    login: (req, res) => {
-        console.log("hit login")
-        res.sendStatus(200)
+    login: async (req, res) => {
+        try {
+            const { username, password } = req.body
+            let foundUser = await User.findOne({ where: { username } })
+
+            if (foundUser) {
+                const isAuthenticated = bcrypt.compareSync(
+                    password,
+                    foundUser.hashedPass
+                )
+                if (isAuthenticated) {
+                    const token = createToken(foundUser.username, foundUser.id)
+                    const exp = Date.now() + 1000 * 60 * 60 * 48
+
+                    res.status(200).send({
+                        username: foundUser.username,
+                        userId: foundUser.id,
+                        token,
+                        exp
+                    })
+                } else {
+                    res.status(400).send("that password is incorrect")
+                }
+            } else {
+                res.status(400).send("That username does not exist")
+            }
+        } catch (err) {
+            console.log(err)
+            res.status(400).send("Error in login")
+        }
     }
 }
