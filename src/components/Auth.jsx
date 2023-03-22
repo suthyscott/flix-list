@@ -12,6 +12,7 @@ const Auth = () => {
     axios.post(register ? '/api/register' : '/api/login', {username, password})
       .then(res => {
         console.log(res.data)
+        // invoke login function from context
         setPassword('')
         setUsername('')
       })
