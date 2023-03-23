@@ -2,7 +2,7 @@ const {Movie, Show} = require("../models/tables")
 
 module.exports = {
     addMovie: async (req, res) => {
-       try{
+       try {
         const {userId, movieName, priority, imageUrl, length} = req.body
 
         await Movie.create({
@@ -20,7 +20,23 @@ module.exports = {
        }
     },
     addShows: async (req, res) => {
-        // receive necessary info on req.body, insert it into the db, send back a response
+        try {
+            const {userId, showName, priority, imageUrl, avgEpisodeLength, seasons} = req.body
+    
+            await Show.create({
+                userId,
+                showName,
+                priority,
+                imageUrl,
+                avgEpisodeLength,
+                seasons
+            })
+    
+            res.sendStatus(200)
+           } catch(err){
+            console.log(err)
+            res.status(500).send('The movie was not added correctly!')
+           }
 
     }
 }

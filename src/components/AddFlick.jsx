@@ -1,8 +1,15 @@
-import React from 'react'
+import {useState} from 'react'
+import MovieForm from './MovieForm'
+import ShowForm from './ShowForm'
 
 const AddFlick = () => {
+  const [movie, setMovie] = useState(true)
+
   return (
-    <div>AddFlick</div>
+    <div>
+      {movie ? <MovieForm/> : <ShowForm/>}
+      <button onClick={() => setMovie(!movie)}>Need to add a {movie ? "show?" : "movie?"}</button>
+    </div>
   )
 }
 
