@@ -1,8 +1,10 @@
 import React from 'react'
 
-const ShowCard = () => {
+const ShowCard = ({show}) => {
   return (
-    <div>ShowCard</div>
+    <div>
+      <h2>{show.showName}</h2>
+    </div>
   )
 }
 

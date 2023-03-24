@@ -28,7 +28,7 @@ const Auth = () => {
 
   return (
     <div>
-      <h2>Welcome to FlixList! Please {register ? 'register!' : 'login!'}</h2>
+      <h2>Please {register ? 'register!' : 'login!'}</h2>
       <form onSubmit={e => handleSubmit(e)}>
         <input placeholder='username' value={username} onChange={e => setUsername(e.target.value)}/>
         <input placeholder='password' value={password} onChange={e => setPassword(e.target.value)}/>
