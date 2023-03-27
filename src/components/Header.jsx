@@ -4,18 +4,15 @@ import AuthContext from "../store/authContext"
 
 const Header = () => {
     const { token, logout } = useContext(AuthContext)
-    return (
-        <div>
-            {token ? (
-                <div>
+    return (token ? (
+                <nav className="border border-blue-700 flex justify-center">
                     <NavLink to="/home">Home</NavLink>
                     <NavLink to="/add">Add Flick</NavLink>
                     <button onClick={() => logout()}>Logout</button>
-                </div>
+                </nav>
             ) : (
-                <h2>Welcome to FlixList!</h2>
-            )}
-        </div>
+                <h2 className="flex justify-center">Welcome to FlixList!</h2>
+            )
     )
 }
 
