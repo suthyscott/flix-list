@@ -27,7 +27,7 @@ const Home = () => {
                 onChange={e => setSetSearchInput(e.target.value)}
             />
             <section className="flex justify-evenly w-full">
-                <Movies movies={movies} searchInput={searchInput}/>
+                <Movies movies={movies} searchInput={searchInput} getShowsAndMovies={getShowsAndMovies}/>
                 <Shows shows={shows} searchInput={searchInput}/>
             </section>
         </div>
