@@ -7,7 +7,7 @@ const {SERVER_PORT} = process.env
 const {User, Show, Movie} = require('./models/tables')
 const {sequelize} = require('./util/database')
 const {register, login} = require('./controllers/authCtrl')
-const {addMovie, addShows, getFlix} = require('./controllers/flixCtrl')
+const {addMovie, addShows, getFlix, editMovie, editShow} = require('./controllers/flixCtrl')
 
 const app = express()
 
@@ -27,6 +27,8 @@ app.post('/api/login', login)
 app.post('/api/movies', addMovie)
 app.post('/api/shows', addShows)
 app.get('/api/flix/:userId', getFlix)
+app.put('/api/movies', editMovie)
+app.put('/api/shows', editShow)
 
 sequelize.sync()
 // sequelize.sync({force: true})

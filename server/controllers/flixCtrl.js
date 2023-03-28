@@ -55,5 +55,27 @@ module.exports = {
             console.log(err)
             res.sendStatus(500)
         }
-    }
+    },
+    editMovie: async (req, res) => {
+        try {
+            const { id, movieName, priority, imageUrl, length } = req.body
+
+            await Movie.update(
+                {
+                    movieName,
+                    priority,
+                    imageUrl,
+                    length
+                },
+                { where: { id } }
+            )
+
+            res.status(200).send('Move was updated successfully')
+            
+        } catch (err) {
+            console.log(err)
+            res.status(400).send("We were not able to save your changes:/")
+        }
+    },
+    editShow: async (req, res) => {}
 }
