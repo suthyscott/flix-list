@@ -70,12 +70,43 @@ module.exports = {
                 { where: { id } }
             )
 
-            res.status(200).send('Move was updated successfully')
+            res.status(200).send('Movie was updated successfully')
             
         } catch (err) {
             console.log(err)
             res.status(400).send("We were not able to save your changes:/")
         }
     },
-    editShow: async (req, res) => {}
+    editShow: async (req, res) => {
+        try {
+            const { id, showName, priority, imageUrl, avgEpisodeLength, seasons } = req.body
+
+            await Show.update(
+                {
+                    showName, priority, imageUrl, avgEpisodeLength, seasons 
+                },
+                { where: { id } }
+            )
+
+            res.status(200).send('Show was updated successfully')
+            
+        } catch (err) {
+            console.log(err)
+            res.status(400).send("We were not able to save your changes:/")
+        }
+    }, 
+    deleteFlix: async (req, res) => {
+        try {
+            const {type, id} = req.params
+            if(type === 'movie'){
+                await Movie.destroy({where: {id}})
+            } else {
+                await Show.destroy({where: {id}})
+            }
+            res.status(200).send('That flick was destroyed!')
+        }catch(err) {
+            console.log(err)
+            res.status(400).send('We were not able to delete that flick')
+        }
+    }
 }

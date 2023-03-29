@@ -28,7 +28,7 @@ const Home = () => {
             />
             <section className="flex justify-evenly w-full">
                 <Movies movies={movies} searchInput={searchInput} getShowsAndMovies={getShowsAndMovies}/>
-                <Shows shows={shows} searchInput={searchInput}/>
+                <Shows shows={shows} searchInput={searchInput} getShowsAndMovies={getShowsAndMovies}/>
             </section>
         </div>
     )

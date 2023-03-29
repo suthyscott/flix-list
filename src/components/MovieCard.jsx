@@ -21,6 +21,15 @@ const MovieCard = ({ movie, getShowsAndMovies }) => {
         })
         .catch(err => console.log(err))
     }
+
+    const deleteMovie = () => {
+        axios.delete(`/api/flix/movie/${movie.id}`)
+            .then(res => {
+                console.log(res.data)
+                getShowsAndMovies()
+            })
+            .catch(err => console.log(err))
+    }
     return (
         <div className="w-3/4 border border-green-500 flex flex-col items-center">
             {!editing ? (
@@ -43,7 +52,7 @@ const MovieCard = ({ movie, getShowsAndMovies }) => {
                         onChange={e => setPriority(+e.target.value)}
                     >
                         {optionsArr.map(op => (
-                            <option value={op}>{op}</option>
+                            <option value={op} key={op}>{op}</option>
                         ))}
                     </select>
 
@@ -62,6 +71,7 @@ const MovieCard = ({ movie, getShowsAndMovies }) => {
                 </form>
             )}
             <button onClick={e => setEditing(!editing)}>Edit Movie</button>
+            <button onClick={e => deleteMovie()}>Delete Movie</button>
         </div>
     )
 }

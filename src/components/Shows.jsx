@@ -1,7 +1,7 @@
 import React from 'react'
 import ShowCard from './ShowCard'
 
-const Shows = ({shows, searchInput}) => {
+const Shows = ({shows, searchInput, getShowsAndMovies}) => {
 
   let filtered = shows.filter(show => {
     let title = show.showName.toLowerCase()
@@ -9,7 +9,7 @@ const Shows = ({shows, searchInput}) => {
   })
 
   let showsDisplay = filtered.map(show => {
-    return <ShowCard show={show} key={show.id}/>
+    return <ShowCard show={show} key={show.id} getShowsAndMovies={getShowsAndMovies}/>
   })
 
   return (
