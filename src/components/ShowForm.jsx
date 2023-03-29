@@ -8,7 +8,7 @@ const ShowForm = () => {
   const [avgEpisodeLength, setAvgEpisodeLength] = useState('')
   const [imageUrl, setImageUrl] = useState('')
   const [seasons, setSeasons] = useState(1)
-  const {userId} = useContext(AuthContext)
+  const {userId, token} = useContext(AuthContext)
 
   const optionsArr = [1,2,3,4,5,6,7,8,9,10]
   
@@ -23,7 +23,11 @@ const ShowForm = () => {
       userId
     }
     
-    axios.post('/api/shows', body)
+    axios.post('/api/shows', body, {
+      headers: {
+        authorization: token
+      }
+    })
       .then(res => console.log(res))
   }
 

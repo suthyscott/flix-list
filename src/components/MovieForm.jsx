@@ -7,7 +7,8 @@ const MovieForm = () => {
     const [priority, setPriority] = useState(1)
     const [length, setLength] = useState('')
     const [imageUrl, setImageUrl] = useState('')
-    const {userId} = useContext(AuthContext)
+    const {userId, token} = useContext(AuthContext)
+    console.log(token)
 
     const optionsArr = [1,2,3,4,5,6,7,8,9,10]
     
@@ -21,8 +22,13 @@ const MovieForm = () => {
         userId
       }
       
-      axios.post('/api/movies', body)
+      axios.post('/api/movies', body, {
+        headers: {
+          authorization: token
+        }
+      })
         .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
 
   return (
