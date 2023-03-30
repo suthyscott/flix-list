@@ -1,5 +1,6 @@
-import { useState } from "react"
-import axios from 'axios'
+import { useState, useContext } from "react"
+import axios from "axios"
+import AuthContext from "../store/authContext"
 
 const MovieCard = ({ movie, getShowsAndMovies }) => {
     const [editing, setEditing] = useState(false)
@@ -7,23 +8,30 @@ const MovieCard = ({ movie, getShowsAndMovies }) => {
     const [imageUrl, setImageUrl] = useState(movie.imageUrl)
     const [length, setLength] = useState(movie.length)
     const [priority, setPriority] = useState(movie.priority)
+    const { token } = useContext(AuthContext)
 
     const optionsArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      let body = {movieName, imageUrl, length, priority, id: movie.id}
+    const handleSubmit = e => {
+        e.preventDefault()
+        let body = { movieName, imageUrl, length, priority, id: movie.id }
 
-      axios.put('/api/movies', body)
-        .then(res => {
-          getShowsAndMovies()
-          setEditing(false)
-        })
-        .catch(err => console.log(err))
+        axios
+            .put("/api/movies", body, {
+                headers: { authorization: token }
+            })
+            .then(res => {
+                getShowsAndMovies()
+                setEditing(false)
+            })
+            .catch(err => console.log(err))
     }
 
     const deleteMovie = () => {
-        axios.delete(`/api/flix/movie/${movie.id}`)
+        axios
+            .delete(`/api/flix/movie/${movie.id}`, {
+                headers: { authorization: token }
+            })
             .then(res => {
                 console.log(res.data)
                 getShowsAndMovies()
@@ -52,7 +60,9 @@ const MovieCard = ({ movie, getShowsAndMovies }) => {
                         onChange={e => setPriority(+e.target.value)}
                     >
                         {optionsArr.map(op => (
-                            <option value={op} key={op}>{op}</option>
+                            <option value={op} key={op}>
+                                {op}
+                            </option>
                         ))}
                     </select>
 
