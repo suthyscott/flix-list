@@ -5,7 +5,7 @@ import AuthContext from "../store/authContext"
 const Header = () => {
     const { token, logout } = useContext(AuthContext)
     return (token ? (
-                <nav className="border border-blue-700 flex justify-center">
+                <nav className="border border-blue-700 flex justify-center bg-primary h-[10vh] phone:bg-secondary tablet:bg-highlight desktop:bg-third">
                     <NavLink to="/home">Home</NavLink>
                     <NavLink to="/add">Add Flick</NavLink>
                     <button onClick={() => logout()}>Logout</button>
