@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "epxress": "0.0.1-security",
+    "hamburger-react": "^2.5.0",
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",

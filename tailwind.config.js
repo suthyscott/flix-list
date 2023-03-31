@@ -7,7 +7,8 @@ module.exports = {
     screens: {
       phone: '420px',
       tablet: '768px',
-      desktop: '1024px'
+      desktop: '1024px',
+      reverseDesktop: {'max': '1023px'},
     },
     colors: {
       primary: '#C95D63',
