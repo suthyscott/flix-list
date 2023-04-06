@@ -36,7 +36,7 @@ module.exports = {
             }
         } catch (err) {
             console.log(err)
-            res.status(400).send("error in register")
+            res.status(400).send(err)
         }
     },
     login: async (req, res) => {
@@ -67,7 +67,7 @@ module.exports = {
             }
         } catch (err) {
             console.log(err)
-            res.status(400).send("Error in login")
+            res.status(400).send(err)
         }
     }
 }
