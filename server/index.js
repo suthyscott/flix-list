@@ -1,8 +1,9 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
+const path = require('path')
 
-const {SERVER_PORT} = process.env
+const {PORT} = process.env
 
 const {User, Show, Movie} = require('./models/tables')
 const {sequelize} = require('./util/database')
@@ -14,6 +15,8 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
+
+app.use(express.static(path.resolve(__dirname, "../build")));
 
 User.hasMany(Show)
 Show.belongsTo(User)
@@ -32,10 +35,14 @@ app.put('/api/movies', isAuthenticated, editMovie)
 app.put('/api/shows', isAuthenticated, editShow)
 app.delete('/api/flix/:type/:id', isAuthenticated, deleteFlix)
 
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+  });
+
 sequelize.sync()
 // sequelize.sync({force: true})
     .then(() => {
         
-        app.listen(SERVER_PORT, () => console.log(`Take us to warp ${SERVER_PORT}!`))
+        app.listen(PORT, () => console.log(`Take us to warp ${PORT}!`))
     })
     .catch(err => console.log(err))

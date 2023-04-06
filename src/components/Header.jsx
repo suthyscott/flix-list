@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
 import AuthContext from "../store/authContext"
-import Hamburger from "hamburger-react"
+// import Hamburger from "hamburger-react"
 
 const Header = () => {
     const { token, logout } = useContext(AuthContext)
@@ -32,7 +32,7 @@ const Header = () => {
                 </button>
             </div>
             <div className="desktop:hidden">
-                <Hamburger toggled={isOpen} toggle={setOpen} />
+                {/* <Hamburger toggled={isOpen} toggle={setOpen} /> */}
             </div>
             <div className="reverseDesktop:hidden">
                 <NavLink to="/home">Home</NavLink>
